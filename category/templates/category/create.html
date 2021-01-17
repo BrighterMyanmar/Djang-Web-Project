@@ -6,6 +6,23 @@
     <div class="container">
         <h1 class="text-center text-info my-5">Create New SubCategory</h1>
         <div class="col-md-6 offset-md-3">
+            {% if form.errors %}
+                {% for error in form.errors %}
+                    <p>{{error}}</p>
+                {% endfor %}
+            {% endif %}
+
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>{{field.name}}</strong> {{error}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form|crispy}}
