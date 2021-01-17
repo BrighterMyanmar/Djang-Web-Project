@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Category, SubCategory
 from .forms import SubCatFrom
 
@@ -15,5 +15,14 @@ def subs(request):
 
 
 def create(request):
-    form = SubCatFrom()
+    if request.method == "POST":
+       form = SubCatFrom(request.POST,request.FILES)
+       if form.is_valid():
+           form.save() 
+           return redirect('/cats/subs')
+        
+    else :
+        print("Get Method")
+        form = SubCatFrom()
+
     return render(request,'category/create.html',{'form':form})
