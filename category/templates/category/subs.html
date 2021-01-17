@@ -1,0 +1,43 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+    <h3 class="text-center text-info my-5">Sub Categories Page</h3>
+   <div class="container">
+       <div class="col-md-8 offset-md-2">
+        <a href="#" class="btn btn-primary btn-sm mb-2">
+            <span>Create</span>
+            <i class="material-icons">add</i>
+        </a>
+        <table class="table table-bordered">
+            <thead>
+                <tr class="bg-dark text-white">
+                    <th>No.</th>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Parent</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cat in cats %}
+                    <tr>
+                        <td>{{cat.id}}</td>
+                        <td>{{cat.name}}</td>
+                        <td><img src="{{cat.image.url}}" alt="" width="50" height="50"></td>
+                        <td>{{cat.parent.name}}</td>
+                        <td>
+                            <a href="#" class="btn btn-warning btn-sm">
+                                <i class="material-icons">edit</i>
+                            </a>
+                            <a href="#" class="btn btn-danger btn-sm">
+                                <i class="material-icons">delete</i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+       </div>
+   </div>
+   
+{% endblock %}

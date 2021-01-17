@@ -1,0 +1,40 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content %}
+    <h1 class="text-center my-5">All Categories</h1>
+    <div class="col-md-8 offset-md-2">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Childs</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cat in cats %}
+                <tr>
+                    <td>{{cat.id}}</td>
+                    <td>{{cat.name}}</td>
+                    <td><img src="{{cat.image.url}}" alt="" class="small-image"></td>
+                    <td>
+                        <a href="{% url 'all-sub-cats' %}" class="btn btn-info btn-sm">
+                            <i class="material-icons text-white">visibility</i>
+                        </a>
+                    </td>
+                    <td>
+                        <button class="btn btn-warning btn-sm">
+                            <i class="material-icons">edit</i>
+                        </button>
+                        <button class="btn btn-danger btn-sm">
+                            <i class="material-icons">delete</i>
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
