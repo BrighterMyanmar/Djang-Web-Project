@@ -1,0 +1,53 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+    <div class="container mt-3">
+    <div class="row">
+    {% for product in products %}
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <h6 class="text-center">${{product.price}}</h6>
+                <img src="{{product.image.url}}" height="150" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{product.name}}</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{product.price}}</li>
+                        <li class="list-group-item">{{product.category.name}}</li>
+                        <li class="list-group-item">{{product.subcat.name}}</li>
+                    </ul>
+                    <button onclick="addToCart('{{product.id}}')" class="btn btn-info btn-sm float-end text-white">
+                        <i class="material-icons">shopping_cart</i>
+                        <span>Add to Cart</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+
+<script>
+    let cardProduct = [];
+    let oldProduct = localStorage.getItem('orderList');
+    if(oldProduct != null){
+        cardProduct = JSON.parse(oldProduct);
+        document.querySelector('.cart_count').innerHTML = cardProduct.length;
+    }
+    let addToCart = (id) => {
+        let index = cardProduct.indexOf(id);
+        if(index == -1){
+            cardProduct.push(id);
+        }
+        document.querySelector('.cart_count').innerHTML = cardProduct.length;
+        localStorage.setItem('orderList',JSON.stringify(cardProduct));
+    }
+    let showCardView = () =>{
+        let products = JSON.parse(localStorage.getItem('orderList'));
+        if(products.length > 0){
+            let product = products.join(',');
+            window.location.href = `http://localhost:8000/cartview/${product}`
+        }
+       
+    }
+</script>
+{% endblock %}

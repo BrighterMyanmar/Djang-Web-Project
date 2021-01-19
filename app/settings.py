@@ -14,6 +14,7 @@ INSTALLED_APPS = [
     'app',
     'category',
     'user',
+    'product',
     "crispy_forms",
     "crispy_bootstrap5",
     'django.contrib.admin',

@@ -34,3 +34,17 @@
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
   }
+
+.cart_count{
+    display:inline-block;
+    width:25px;
+    height:25px;
+    background:red;
+    border-radius: 20px;
+    text-align:center;
+    position:relative;
+    top:-15px;
+    right:-40px;
+    padding-top:2px;
+    font-size: 14px;
+}
