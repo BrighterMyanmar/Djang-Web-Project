@@ -1,0 +1,38 @@
+{% extends 'app/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h1 class="text-center text-info my-5">Register Page</h1>
+    <div class="container">
+        <div class="col-md-8 offset-md-2">
+            <form method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6">
+                        {{form.username|as_crispy_field}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.email|as_crispy_field}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.password1|as_crispy_field}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.password2|as_crispy_field}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form.phone|as_crispy_field}}
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <button type="submit" class="btn btn-primary btn-sm float-end ms-2 mt-4">Register</button>
+                        <button type="reset" class="btn btn-outline-warning btn-sm float-end mt-4">Cancle</button>
+                    </div>
+                </div>
+
+               
+                
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+#456CoderHeHe

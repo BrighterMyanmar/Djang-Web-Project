@@ -1,0 +1,11 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+   
+    <div class="container">
+        <h1 class="text-center text-info my-5">Logout</h1>
+        <div class="col-md-2 offset-md-5">
+            <a href="{% url 'user-login' %}">Login Again</a>
+        </div>
+    </div>
+{% endblock %}

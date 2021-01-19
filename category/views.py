@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Category, SubCategory
 from .forms import SubCatFrom
+from django.contrib.auth.decorators import login_required
+from .decorators import allow_users
 
 def cats(request):
     context = {
@@ -13,6 +15,8 @@ def subs(request):
     cats = SubCategory.objects.all();
     return render(request,'category/subs.html',{'cats':cats})
 
+@login_required
+@allow_users(allowed_roles=['admins'])
 def create(request):
     if request.method == "POST":
        form = SubCatFrom(request.POST,request.FILES)
