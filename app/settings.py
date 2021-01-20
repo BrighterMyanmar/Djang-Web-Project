@@ -16,6 +16,7 @@ INSTALLED_APPS = [
     'user',
     'product',
     "crispy_forms",
+    "rest_framework",
     "crispy_bootstrap5",
     'django.contrib.admin',
     'django.contrib.auth',
@@ -113,3 +114,8 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 LOGIN_REDIRECT_URL="all-cats"
 LOGIN_URL="user-login"
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES':['rest_framework.permissions.IsAuthenticatedOrReadOnly'],
+    'DEFAULT_AUTHENTICATION_CLASSES':['rest_framework_simplejwt.authentication.JWTAuthentication']
+}

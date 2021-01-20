@@ -1,7 +1,18 @@
 {% extends 'app/base.html' %}
 
 {% block content %}
+    
     <div class="container mt-3">
+        <div class="col-md-6 offset-md-3">
+            {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>{{message}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+    {% endif %}
+        </div>
     <div class="row">
     {% for product in products %}
         <div class="col-md-3 mb-4">
@@ -27,6 +38,8 @@
 </div>
 
 <script>
+    localStorage.removeItem('orderList');
+    document.querySelector('.cart_count').innerHTML =0;
     let cardProduct = [];
     let oldProduct = localStorage.getItem('orderList');
     if(oldProduct != null){

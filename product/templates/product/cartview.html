@@ -1,7 +1,7 @@
 {% extends 'app/base.html'%}
 
 {% block content %}
-    <h1>Your Cart</h1>
+    <h1 class="text-center text-info my-5">Your Cart</h1>
     <div class="container">
         <div class="col-md-10 offset-md-1">
             <table class="table table-bordered">
@@ -19,6 +19,20 @@
                 <tbody id="productHolder">
                     
                 </tbody>
+                <tbody>
+                    <tr>
+                        <td colspan="5">
+                            <p class="float-end">Grand Total</p>
+                        </td>
+                        <td id="grandTotal" colspan="2"></td>
+                    </tr>
+                    <tr>
+                        <td id="grandTotal" colspan="6">
+                            <button onclick="checkOut()" class="btn btn-primary btn-sm float-end">Check Out</button>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
@@ -29,10 +43,12 @@
         
 
         document.querySelector('.cart_count').innerHTML = products.length;
-        
+      
         let generateCards = (products) => {
             let str = "";
+            let grandtotal = 0;
             products.forEach((product,index)=>{
+                grandtotal += product.count * product.price;
             str += `
             <tr>
                 <td>${++index}</td>
@@ -54,6 +70,7 @@
             `
             });
             document.querySelector('#productHolder').innerHTML = str;
+            document.querySelector('#grandTotal').innerHTML = grandtotal;
         }
 
         let removeItem = (id) => {
@@ -95,6 +112,15 @@
         });
         localStorage.setItem('orderList',JSON.stringify(items));
         generateCards(products);
+
+        let checkOut = () =>{
+            let orderList = "";
+            products.forEach((product)=>{
+                orderList += product.id + ":" + product.count + ",";
+            });
+            orderList = orderList.slice(0,orderList.length -1);
+            window.location.href = `http://localhost:8000/checkout/${orderList}`;
+        }
         
     </script>
 {% endblock %}
